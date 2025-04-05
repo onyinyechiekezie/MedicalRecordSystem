@@ -3,12 +3,10 @@ package org.Medical.controllers;
 import org.Medical.data.models.Patient;
 import org.Medical.services.PatientServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/patients")
 public class PatientController {
 
     @Autowired
@@ -18,8 +16,17 @@ public class PatientController {
     public Patient register(@RequestBody Patient patient) {
         return patientServices.registerPatient(patient);
     }
+    @GetMapping("/{id}")
+    public List<Patients> getAllPatients() {return patienServices.getPatientById(id);}
 
+    @PutMapping("/{id}")
+    public Patient updatePatient(@PathVariable String id, @RequestBody Patient patient) {
+        return patientServices.updatePatient(id, patient);
+    }
 
-
-
+    @DeleteMapping("/{id}")
+    public void deletePatient(@PathVariable String id) {
+        patientServices.deletePatient(id);
+    }
 }
+
