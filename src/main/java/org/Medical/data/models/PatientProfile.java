@@ -18,6 +18,9 @@ public class PatientProfile {
     private String lastName;
     private String gender;
     private String dateOfBirth;
+    private String HEIGHT;
+    private String WEIGHT;
+
 
 
 }
