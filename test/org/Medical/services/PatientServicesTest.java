@@ -133,13 +133,13 @@ class PatientServicesTest {
     }
 
     @Test
-    void loginPatient_emptyEmailField_throwsExceptionTest() {
+    void loginPatient_emptyEmailFields_throwsExceptionTest() {
         assertThrows(InvalidInputException.class, () ->
                 patientServices.loginPatient(null, ""));
     }
 
     @Test
-    void loginPatient_emptyPasswordField_throwsExceptionTest() {
+    void loginPatient_emptyPassword_throwsExceptionTest() {
         Patient patient = new Patient();
         patient.setEmail("jane@example.com");
         patient.setPassword("pass123");
