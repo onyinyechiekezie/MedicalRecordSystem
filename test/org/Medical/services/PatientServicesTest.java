@@ -133,7 +133,7 @@ class PatientServicesTest {
     }
 
     @Test
-    void loginPatient_emptyEmailField_throwsExceptionTest() {
+    void loginPatient_emptyEmailFields_throwsExceptionTest() {
         assertThrows(InvalidInputException.class, () ->
                 patientServices.loginPatient(null, ""));
     }
