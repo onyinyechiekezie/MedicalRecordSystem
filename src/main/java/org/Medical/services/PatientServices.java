@@ -1,6 +1,5 @@
 package org.Medical.services;
 
-import lombok.RequiredArgsConstructor;
 import org.Medical.data.models.Patient;
 import org.Medical.data.repositories.AppointmentRepository;
 import org.Medical.data.repositories.DoctorRepository;
@@ -15,11 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PatientServices {
 
-
-    private final PatientRepository patientRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Autowired
     private DoctorRepository doctorRepository;
@@ -39,8 +37,8 @@ public class PatientServices {
         Patient patient = getPatientByEmail(email);  // will throw UserNotFoundException if not found
         PatientValidator.validateLogin(email, password, patient);
         return patient;
-    }
 
+    }
 
     public Long countPatients () {
             return patientRepository.count();

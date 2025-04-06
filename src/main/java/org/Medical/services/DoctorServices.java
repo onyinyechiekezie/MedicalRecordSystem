@@ -11,6 +11,8 @@ import org.Medical.Validators.DoctorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DoctorServices {
 
@@ -36,6 +38,27 @@ public class DoctorServices {
 //        DoctorValidator.validateLogin(email, password, existingDoctor);
 //        return existingDoctor;
 //    }
+
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
+    }
+
+    public Doctor getDoctorById(String id) {
+        return doctorRepository.findById(id).orElse(null);
+    }
+
+    public Doctor updateDoctor(String id, Doctor doctor) {
+        doctor.setId(id);
+        return doctorRepository.save(doctor);
+    }
+
+    public void deleteDoctor(String id) {
+        doctorRepository.deleteById(id);
+    }
+
+    public Doctor findByEmail(String email) {
+        return doctorRepository.findByEmail(email);
+    }
 
 }
 
