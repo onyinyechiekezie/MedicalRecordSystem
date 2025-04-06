@@ -7,30 +7,48 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
-@RequestMapping("appointments")
+@RequestMapping("/api/appointments")
 public class AppointmentController {
 
     @Autowired
-    private AppointmentServices appointmentService;
+    private AppointmentServices appointmentServices;
 
-    @PostMapping("/book")
-    public Appointment bookAppointment(@RequestBody Appointment appointment) {
-        return appointmentService.bookAppointment(appointment);
+    @PostMapping
+    public Appointment createAppointment(@RequestBody Appointment appointment) {
+        return appointmentServices.createAppointment(appointment);
+    }
+
+
+    @GetMapping
+    public List<Appointment> getAllAppointments() {
+        return appointmentServices.getAllAppointments();
+    }
+
+    @GetMapping("/{id}")
+    public Appointment getAppointmentById(@PathVariable String id) {
+        return appointmentServices.getAppointmentById(id);
     }
 
     @GetMapping("/patient/{patientId}")
-    public List<Appointment> getAppointmentsForPatient(@PathVariable String patientId) {
-        return appointmentService.getAppointmentsByPatient(patientId);
+    public List<Appointment> getAppointmentsByPatient(@PathVariable String patientId) {
+        return appointmentServices.getAppointmentsByPatient(patientId);
     }
 
     @GetMapping("/doctor/{doctorId}")
-    public List<Appointment> getAppointmentsForDoctor(@PathVariable String doctorId) {
-        return appointmentService.getAppointmentsByDoctor(doctorId);
+    public List<Appointment> getAppointmentsByDoctor(@PathVariable String doctorId) {
+        return appointmentServices.getAppointmentsByDoctor(doctorId);
     }
 
-    @DeleteMapping("/{appointmentId}")
-    public void cancelAppointment(@PathVariable String appointmentId) {
-        appointmentService.cancelAppointment(appointmentId);
-    }
+//    @PutMapping("/{id}")
+//    public Appointment updateAppointment(@PathVariable String id, @RequestBody Appointment appointment) {
+//        return appointmentServices.updateAppointment(id, appointment);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public void deleteAppointment(@PathVariable String id) {
+//        appointmentServices.deleteAppointment(id);
+//    }
 }
+

@@ -2,6 +2,7 @@ package org.Medical.services;
 
 import lombok.RequiredArgsConstructor;
 import org.Medical.data.models.Appointment;
+import lombok.RequiredArgsConstructor;
 import org.Medical.data.models.Patient;
 import org.Medical.data.repositories.AppointmentRepository;
 import org.Medical.data.repositories.DoctorRepository;
@@ -40,8 +41,8 @@ public class PatientServices {
         Patient patient = getPatientByEmail(email);  // will throw UserNotFoundException if not found
         PatientValidator.validateLogin(email, password, patient);
         return patient;
-    }
 
+    }
 
     public Long countPatients () {
             return patientRepository.count();
