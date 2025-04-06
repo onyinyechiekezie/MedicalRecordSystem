@@ -1,6 +1,7 @@
 package org.Medical.services;
 
 import lombok.RequiredArgsConstructor;
+import org.Medical.data.models.Appointment;
 import org.Medical.data.models.Patient;
 import org.Medical.data.repositories.AppointmentRepository;
 import org.Medical.data.repositories.DoctorRepository;
@@ -61,6 +62,16 @@ public class PatientServices {
         public List<Patient> getAllPatients () {
             return patientRepository.findAll();
         }
+
+
+
+//        public List<Appointment> viewAppointments(String patientId) {
+//            return appointmentService.getAppointmentsByPatient(patientId);
+//        }
+//
+//        public void cancelAppointment(String appointmentId) {
+//            appointmentService.cancelAppointment(appointmentId);
+//    }
 
 
 

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Data
 @Document
 @NoArgsConstructor
@@ -17,7 +19,8 @@ public class Appointment {
     private String id;
     //private int appointmentId;
     private Patient patient;
-    private String appointmentDate;
+    private Date appointmentDate;
+    private String appointmentTime;
     private Doctor doctor;
     //private String patientAilment;
 

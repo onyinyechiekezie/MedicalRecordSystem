@@ -40,7 +40,7 @@ class PatientServicesTest {
     @Test
     void registerPatient_countPatients() {
         Patient patient = new Patient();
-        patient.setEmail("test@test.com");
+        patient.setEmail("test1@test.com");
         patient.setPassword("test");
         Patient patient2 = new Patient();
         patient2.setEmail("test2@test.com");
@@ -54,30 +54,30 @@ class PatientServicesTest {
     @Test
     void registerPatient_findPatientByEmail() {
         Patient patient = new Patient();
-        patient.setEmail("test@test.com");
+        patient.setEmail("test3@test.com");
         patient.setPassword("test");
         Patient newPatient = patientServices.registerPatient(patient);
         assertNotNull(newPatient);
-        patientServices.getPatientByEmail("test@test.com");
-        assertEquals(newPatient, patientServices.getPatientByEmail("test@test.com"));
+        patientServices.getPatientByEmail("test3@test.com");
+        assertEquals(newPatient, patientServices.getPatientByEmail("test3@test.com"));
     }
 
     @Test
     void registerPatient_duplicateEmail_throwsException() {
         Patient patient = new Patient();
-        patient.setEmail("test@test.com");
+        patient.setEmail("test4@test.com");
         patient.setPassword("test");
         patientServices.registerPatient(patient);
         Patient duplicate = new Patient();
-        duplicate.setEmail("test@test.com");
-        duplicate.setPassword("anotherpass");
+        duplicate.setEmail("test4@test.com");
+        duplicate.setPassword("another pass");
         assertThrows(DuplicateUserFoundException.class, () -> patientServices.registerPatient(duplicate));
     }
 
     @Test
     void registerPatient_invalidEmail_throwsException() {
         Patient patient = new Patient();
-        patient.setEmail("invalid-email");
+        patient.setEmail("invalid email");
         patient.setPassword("test");
         assertThrows(InvalidInputException.class, () -> patientServices.registerPatient(patient));
     }
