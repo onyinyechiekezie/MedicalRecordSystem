@@ -22,8 +22,5 @@ public class AppointmentServices {
     public List<Appointment> getAppointmentsByDoctor(String doctorId){ return appointmentRepository.findByDoctorId(doctorId); }
 
     public List<Appointment> getAppointmentsByPatient(String patientId){ return appointmentRepository.findPatientById(patientId); }
-
-    public Appointment updateAppointment(String id, Appointment appointment.setId(id) { return appointmentRepository.save(appointment); }
-
     public void deleteAppointment(String id) { appointmentRepository.deleteById(id); }
 }
