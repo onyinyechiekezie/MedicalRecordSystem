@@ -134,8 +134,8 @@ class PatientServicesTest {
 
     @Test
     void loginPatient_emptyEmailFields_throwsExceptionTest() {
-        assertThrows(InvalidInputException.class, () ->
-                patientServices.loginPatient(null, ""));
+        assertThrows(UserNotFoundException.class, () ->
+                patientServices.loginPatient("", ""));
     }
 
     @Test

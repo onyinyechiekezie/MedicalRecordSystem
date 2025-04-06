@@ -38,21 +38,7 @@ public class PatientServices {
         PatientValidator.validateLogin(email, password, patient);
         return patient;
 
-
     }
-//        PatientValidator.validateLogin(email, password);
-//        if (email.trim().isEmpty())
-//            throw new InvalidInputException("Email cannot be empty");
-//        if (password == null || password.trim().isEmpty())
-//            throw new InvalidInputException("Password cannot be empty");
-//
-//        Patient patient = getPatientByEmail(email);
-//        if (!patient.getPassword().equals(password))
-//            throw new InvalidInputException("Invalid email or password");
-//
-//        return patient;
-//    }
-
 
     public Long countPatients () {
             return patientRepository.count();
