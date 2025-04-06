@@ -18,9 +18,4 @@ public class AppointmentServices {
     public List<Appointment> getAllAppointments() { return appointmentRepository.findAll(); }
 
     public Appointment getAppointmentById(String id) { return appointmentRepository.findById(id).orElse(null); }
-
-    public List<Appointment> getAppointmentsByDoctor(String doctorId){ return appointmentRepository.findByDoctorId(doctorId); }
-
-    public List<Appointment> getAppointmentsByPatient(String patientId){ return appointmentRepository.findPatientById(patientId); }
-    public void deleteAppointment(String id) { appointmentRepository.deleteById(id); }
 }
