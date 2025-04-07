@@ -20,6 +20,7 @@ public class AppointmentController {
         return appointmentServices.createAppointment(appointment);
     }
 
+
     @GetMapping
     public List<Appointment> getAllAppointments() {
         return appointmentServices.getAllAppointments();
@@ -40,14 +41,14 @@ public class AppointmentController {
         return appointmentServices.getAppointmentsByDoctor(doctorId);
     }
 
-    @PutMapping("/{id}")
-    public Appointment updateAppointment(@PathVariable String id, @RequestBody Appointment appointment) {
-        return appointmentServices.updateAppointment(id, appointment);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteAppointment(@PathVariable String id) {
-        appointmentServices.deleteAppointment(id);
-    }
+//    @PutMapping("/{id}")
+//    public Appointment updateAppointment(@PathVariable String id, @RequestBody Appointment appointment) {
+//        return appointmentServices.updateAppointment(id, appointment);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public void deleteAppointment(@PathVariable String id) {
+//        appointmentServices.deleteAppointment(id);
+//    }
 }
 

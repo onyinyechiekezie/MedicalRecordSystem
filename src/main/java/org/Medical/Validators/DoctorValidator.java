@@ -16,6 +16,9 @@ public class DoctorValidator {
         if (doctor.getEmail() == null || !Pattern.matches(EMAIL_REGEX, doctor.getEmail())) {
             throw new InvalidInputException("Invalid email");
         }
+        if (doctor.getPassword() == null || doctor.getPassword().trim().isEmpty()) {
+            throw new InvalidInputException("Password is required");
+        }
     }
 
     public static void validateLogin(String email, String inputPassword, Doctor existingDoctor) {
@@ -25,9 +28,13 @@ public class DoctorValidator {
         if (existingDoctor == null) {
             throw new UserNotFoundException("Doctor with email " + email + " not found.");
         }
-
         if (!existingDoctor.getPassword().equals(inputPassword)) {
-            throw new InvalidInputException("Incorrect password. Please try again.");
+            throw new InvalidInputException("Invalid email or password. Please try again.");
+        }
+        if (email.trim().isEmpty())
+            throw new InvalidInputException("Email cannot be empty");
+        if (existingDoctor.getPassword().trim().isEmpty()) {
+            throw new InvalidInputException("Password is required");
         }
 
 

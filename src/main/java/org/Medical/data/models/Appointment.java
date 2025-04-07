@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Data
 @Document
 @NoArgsConstructor
@@ -20,7 +22,9 @@ public class Appointment {
     @DBRef
     private Patient patient;
     private String appointmentDate;
-    @DBRef
+//    @DBRef
+//    private Date appointmentDate;
+    private String appointmentTime;
     private Doctor doctor;
     //private String patientAilment;
 
