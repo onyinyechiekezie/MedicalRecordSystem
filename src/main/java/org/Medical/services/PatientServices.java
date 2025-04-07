@@ -47,8 +47,25 @@ public class PatientServices {
         Patient patient = getPatientByEmail(email);
         PatientValidator.validateLogin(email, password, patient);
         return patient;
-
     }
+
+
+
+
+
+//    public Patient loginPatient(String email, String password) {
+//        PatientValidator.validateLogin(email, password, patient);
+//        Patient existingPatient = patientRepository.findByEmail(email);
+//        if (existingPatient == null) {
+//            throw new UserNotFoundException("No patient found with email: " + email);
+//        }
+//        if (!existingPatient.getPassword().equals(password)) {
+//            throw new InvalidInputException("Incorrect password. Please try again.");
+//        }
+//
+//        return existingPatient;
+//    }
+
 
     public Long countPatients () {
             return patientRepository.count();

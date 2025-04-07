@@ -1,7 +1,6 @@
 package org.Medical.controllers;
 
 import org.Medical.data.models.Doctor;
-import org.Medical.data.models.Patient;
 import org.Medical.dto.request.doctor.RegisterDoctorRequest;
 import org.Medical.services.DoctorServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +9,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.Medical.dto.request.doctor.LoginDoctorRequest;
+
 
 import static org.Medical.utility.DoctorMapper.mapToDoctor;
 
 @RestController
-@RequestMapping("doctors")
+@RequestMapping("/doctors/")
 public class DoctorController {
 
     @Autowired
     private DoctorServices doctorServices;
 
-    @PostMapping("/register")
+    @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDoctorRequest request) {
             try {
                 Doctor doctor = mapToDoctor(request);
@@ -31,9 +32,14 @@ public class DoctorController {
             }
     }
 
-//    @PostMapping("/login")
-//    public Doctor login(@RequestBody Doctor doctor) {
-//        return doctorServices.loginDoctor(doctor);
-//    }
+    @PostMapping("login")
+        public ResponseEntity<String> login(@RequestBody LoginDoctorRequest request) {
+            try {
+                doctorServices.loginDoctor(request.getEmail(), request.getPassword());
+                return ResponseEntity.ok("Doctor logged in successfully");
+        }   catch (Exception e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 }
