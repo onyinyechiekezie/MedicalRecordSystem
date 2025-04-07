@@ -3,9 +3,11 @@ package org.Medical.services;
 import lombok.RequiredArgsConstructor;
 import org.Medical.data.models.Appointment;
 import lombok.RequiredArgsConstructor;
+import org.Medical.data.models.Doctor;
 import org.Medical.data.models.Patient;
 import org.Medical.data.repositories.AppointmentRepository;
 import org.Medical.data.repositories.DoctorRepository;
+import org.Medical.data.repositories.PatientProfileRepository;
 import org.Medical.data.repositories.PatientRepository;
 import org.Medical.Validators.PatientValidator;
 import org.Medical.exceptions.DuplicateUserFoundException;
@@ -29,16 +31,20 @@ public class PatientServices {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private PatientProfileRepository patientProfileRepository;
+
     public Patient registerPatient(Patient patient) {
         PatientValidator.validateRegistration(patient);
         if (patientRepository.findByEmail(patient.getEmail()) != null) {
             throw new DuplicateUserFoundException("A patient with email " + patient.getEmail() + " already exists.");
         }
+        patientProfileRepository.save(patient.getProfile());
         return patientRepository.save(patient);
     }
 
     public Patient loginPatient(String email, String password) {
-        Patient patient = getPatientByEmail(email);  // will throw UserNotFoundException if not found
+        Patient patient = getPatientByEmail(email);
         PatientValidator.validateLogin(email, password, patient);
         return patient;
 
@@ -63,6 +69,11 @@ public class PatientServices {
         public List<Patient> getAllPatients () {
             return patientRepository.findAll();
         }
+
+    public Patient updatePatient(String id, Patient patient) {
+        patient.setId(id);
+        return patientRepository.save(patient);
+    }
 
 
 

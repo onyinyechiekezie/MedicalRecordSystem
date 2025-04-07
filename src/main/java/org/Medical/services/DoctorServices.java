@@ -1,13 +1,14 @@
 package org.Medical.services;
 
-import org.Medical.Validators.PatientValidator;
+
 import org.Medical.data.models.Doctor;
-import org.Medical.data.models.Patient;
 import org.Medical.data.repositories.AppointmentRepository;
 import org.Medical.data.repositories.DoctorRepository;
+import org.Medical.data.repositories.DoctorProfileRepository;
 import org.Medical.data.repositories.PatientRepository;
 import org.Medical.exceptions.DuplicateUserFoundException;
 import org.Medical.Validators.DoctorValidator;
+import org.Medical.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ public class DoctorServices {
     private DoctorRepository doctorRepository;
 
     @Autowired
+    private DoctorProfileRepository doctorProfileRepository;
+
+    @Autowired
     private AppointmentRepository appointmentRepository;
 
     public Doctor registerDoctor(Doctor doctor) {
@@ -30,14 +34,24 @@ public class DoctorServices {
         if (doctorRepository.findByEmail(doctor.getEmail()) != null) {
             throw new DuplicateUserFoundException("A doctor with email " + doctor.getEmail() + " already exists.");
         }
+        doctorProfileRepository.save(doctor.getProfile());
         return doctorRepository.save(doctor);
     }
 
-//    public Doctor loginDoctor (String email, String password) {
-//        Doctor existingDoctor = doctorRepository.findByEmail(email);
-//        DoctorValidator.validateLogin(email, password, existingDoctor);
-//        return existingDoctor;
-//    }
+    public Doctor loginDoctor(String email, String password) {
+        Doctor doctor = getDoctorByEmail(email);
+        DoctorValidator.validateLogin(email, password, doctor);
+        return doctor;
+
+    }
+
+    Doctor getDoctorByEmail(String email) {
+        Doctor doctor = doctorRepository.findByEmail(email);
+        if (doctor == null) {
+            throw new UserNotFoundException("No doctor found with email: " + email);
+        }
+        return doctor;
+    }
 
     public List<Doctor> getAllDoctors() {
         return doctorRepository.findAll();
@@ -60,5 +74,12 @@ public class DoctorServices {
         return doctorRepository.findByEmail(email);
     }
 
+    public void deleteAll() {
+        doctorRepository.deleteAll();
+    }
+
+    public long countDoctors() {
+        return doctorRepository.count();
+    }
 }
 

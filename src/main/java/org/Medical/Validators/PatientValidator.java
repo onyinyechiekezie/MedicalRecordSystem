@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class PatientValidator {
 
-    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+    private static final String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
     private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
     public static void validateRegistration(Patient patient) {
@@ -41,21 +41,21 @@ public class PatientValidator {
         }
     }
 
-    public static void validate(Patient patient) {
-        if (patient == null) throw new InvalidInputException("Patient cannot be null");
-
-        if (patient.getEmail() == null || !isValidEmail(patient.getEmail())) {
-                throw new InvalidInputException("Invalid email");
-        }
-
-        if (patient.getPassword() == null || patient.getPassword().trim().isEmpty()) {
-            throw new InvalidInputException("Password is required");
-        }
-        }
-
-        private static boolean isValidEmail(String email) {
-            return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
-        }
+//    public static void validate(Patient patient) {
+//        if (patient == null) throw new InvalidInputException("Patient cannot be null");
+//
+//        if (patient.getEmail() == null || !isValidEmail(patient.getEmail())) {
+//                throw new InvalidInputException("Invalid email");
+//        }
+//
+//        if (patient.getPassword() == null || patient.getPassword().trim().isEmpty()) {
+//            throw new InvalidInputException("Password is required");
+//        }
+//        }
+//
+//        private static boolean isValidEmail(String email) {
+//            return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+//        }
 
 
 }
